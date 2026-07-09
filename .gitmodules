@@ -1,0 +1,9 @@
+[submodule "taiga-front"]
+	path = taiga-front
+	url = https://github.com/jthom-blitzy/taiga-front.git
+[submodule "taiga-back"]
+	path = taiga-back
+	url = https://github.com/jthom-blitzy/taiga-back.git
+[submodule "taiga-docker"]
+	path = taiga-docker
+	url = https://github.com/jthom-blitzy/taiga-docker.git
