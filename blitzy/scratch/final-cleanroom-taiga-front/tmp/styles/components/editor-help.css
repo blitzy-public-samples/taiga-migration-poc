@@ -1,0 +1,45 @@
+/**********************
+**** VERTICAL HEIGHT
+***********************/
+/* Do not use this except for the main layout */
+.wysiwyg-help {
+  background: #F1F1F4;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -0.5rem;
+  padding: 0.45rem 0.5rem;
+}
+.wysiwyg-help a {
+  display: inline-block;
+}
+
+.drag-drop-help {
+  font-size: 0.7rem;
+  color: #5A5B72;
+}
+
+.help-markdown,
+.help-button {
+  font-size: 0.7rem;
+  display: flex;
+}
+.help-markdown:hover span,
+.help-button:hover span {
+  transition: color 0.2s linear;
+}
+.help-markdown:hover .icon,
+.help-button:hover .icon {
+  fill: #5CBAA9;
+  transition: fill 0.2s linear;
+}
+.help-markdown span,
+.help-button span {
+  vertical-align: text-top;
+}
+.help-markdown .icon,
+.help-button .icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: #70728F;
+  margin-right: 0.2rem;
+}
