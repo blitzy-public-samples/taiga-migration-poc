@@ -1,0 +1,66 @@
+
+<form>
+  <div tg-project-logo="tg-project-logo" class="project-details-image">
+    <fieldset class="image-container"><img tg-project-logo-big-src="project._attrs" alt="logo" class="image"/>
+      <div class="loading-overlay"><img src="v-1784490701414/svg/spinner-circle.svg" alt="{{'COMMON.LOADING' | translate}}" class="loading-spinner"/></div>
+      <input type="file" id="logo-field" tg-project-logo-model="logoAttachment" class="hidden"/>
+    </fieldset>
+    <button type="button" variant="secondary" title="{{'ADMIN.PROJECT_PROFILE.CHANGE_LOGO' | translate}}" class="btn-small button-full change-image js-change-logo">{{'ADMIN.PROJECT_PROFILE.CHANGE_LOGO' | translate}}</button><a href="#" title="{{ 'ADMIN.PROJECT_PROFILE.ACTION_USE_DEFAULT_LOGO' | translate }}" class="use-default-image js-use-default-logo">{{ 'ADMIN.PROJECT_PROFILE.ACTION_USE_DEFAULT_LOGO' | translate }}</a>
+  </div>
+  <div class="project-details-form-data">
+    <fieldset>
+      <label for="project-name">{{ 'ADMIN.PROJECT_PROFILE.PROJECT_NAME' | translate }}</label>
+      <input type="text" name="name" placeholder="{{'ADMIN.PROJECT_PROFILE.PROJECT_NAME' | translate}}" id="project-name" ng-model="project.name" data-required="true" maxlength="45"/>
+    </fieldset>
+    <fieldset>
+      <label for="project-description">{{ 'ADMIN.PROJECT_PROFILE.DESCRIPTION' | translate }}</label>
+      <textarea name="description" ng-attr-placeholder="{{'ADMIN.PROJECT_PROFILE.DESCRIPTION' | translate}}" id="project-description" ng-model="project.description" data-required="true"></textarea>
+    </fieldset>
+    <fieldset>
+      <label for="tags">{{ 'ADMIN.PROJECT_PROFILE.TAGS' | translate }}</label>
+      <tg-tag-line-common disable-color-selection="disable-color-selection" project="project" tags="projectTags" permissions="modify_project" on-add-tag="ctrl.addTag(name)" on-delete-tag="ctrl.deleteTag(tag)" class="tags-block"></tg-tag-line-common>
+    </fieldset>
+    <fieldset ng-if="project.owner.id != user.id">
+      <tg-admin-project-request-ownership ng-class="{limit: !canCreatePrivateProjects}" can-request="canCreatePrivateProjects" owner="project.owner" project-id="project.id" class="admin-project-profile-owner-actions"></tg-admin-project-request-ownership>
+    </fieldset>
+    <fieldset ng-if="project.owner.id == user.id">
+      <tg-admin-project-change-owner members="project.members.length" owner="project.owner" project-id="project.id" active-users="activeUsers" class="admin-project-profile-owner-actions"></tg-admin-project-change-owner>
+    </fieldset>
+    <fieldset class="looking-for-people">
+      <div class="looking-for-people-selector"><span>{{ 'ADMIN.PROJECT_PROFILE.RECRUITING' | translate }}</span>
+        <tg-svg svg-icon="icon-recruit" svg-title-translate="ADMIN.PROJECT_PROFILE.RECRUITING_MESSAGE"></tg-svg>
+        <div class="check">
+          <input type="checkbox" ng-model="project.is_looking_for_people"/>
+          <div></div><span translate="COMMON.YES" class="check-text check-yes"></span><span translate="COMMON.NO" class="check-text check-no"></span>
+        </div>
+      </div>
+      <div ng-show="project.is_looking_for_people" class="looking-for-people-reason">
+        <label>{{ 'ADMIN.PROJECT_PROFILE.RECRUITING_MESSAGE' | translate }}</label>
+        <input type="text" maxlength="200" ng-model="project.looking_for_people_note" placeholder="{{ 'ADMIN.PROJECT_PROFILE.RECRUITING_PLACEHOLDER' | translate }}"/>
+      </div>
+    </fieldset>
+    <fieldset class="get-feedback">
+      <div class="get-feedback-inner"><span>{{ 'ADMIN.PROJECT_PROFILE.FEEDBACK' | translate }}</span>
+        <div class="check">
+          <input type="checkbox" ng-model="project.is_contact_activated"/>
+          <div></div><span translate="COMMON.YES" class="check-text check-yes"></span><span translate="COMMON.NO" class="check-text check-no"></span>
+        </div>
+      </div>
+    </fieldset>
+    <tg-admin-project-restrictions project="project"></tg-admin-project-restrictions>
+    <fieldset>
+      <div class="project-privacy-settings">
+        <div class="privacy-option">
+          <input ng-disabled="project.is_private &amp;&amp; !project.is_private_extra_info.can_be_updated" type="radio" id="private-project" name="privacy-project" ng-model="project.is_private" ng-value="false" class="privacy-project"/>
+          <label for="private-project" class="trans-button">{{ 'ADMIN.PROJECT_PROFILE.PUBLIC_PROJECT' | translate }}</label>
+        </div>
+        <div class="privacy-option">
+          <input ng-disabled="!project.is_private &amp;&amp; !project.is_private_extra_info.can_be_updated" type="radio" id="public-project" name="privacy-project" ng-model="project.is_private" ng-value="true" class="privacy-project"/>
+          <label for="public-project" class="trans-button">{{'ADMIN.PROJECT_PROFILE.PRIVATE_PROJECT' | translate }}</label>
+        </div>
+      </div><a href="https://community.taiga.io/t/whats-the-difference-between-public-and-private-projects/139" target="_blank" class="private-or-public">
+        <tg-svg svg-icon="icon-question" svg-title-translate="ADMIN.PROJECT_PROFILE.PRIVATE_OR_PUBLIC"></tg-svg><span>{{'ADMIN.PROJECT_PROFILE.PRIVATE_OR_PUBLIC' | translate }}</span></a>
+    </fieldset>
+    <button variant="primary" type="submit" title="{{'COMMON.SAVE' | translate}}" translate="COMMON.SAVE" class="btn-small"></button><a href="" title="{{'ADMIN.PROJECT_PROFILE.DELETE' | translate}}" ng-click="ctrl.openDeleteLightbox()" class="delete-project">{{ 'ADMIN.PROJECT_PROFILE.DELETE' | translate }}</a>
+  </div>
+</form>

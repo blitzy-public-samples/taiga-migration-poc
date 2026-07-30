@@ -1,0 +1,41 @@
+
+<form>
+  <div tg-project-logo="tg-project-logo" class="project-details-image">
+    <fieldset class="image-container"><img tg-project-logo-big-src="project._attrs" alt="logo" class="image"/>
+      <div class="loading-overlay"><img src="v-1784490701414/svg/spinner-circle.svg" alt="{{'COMMON.LOADING' | translate}}" class="loading-spinner"/></div>
+      <input type="file" id="logo-field" tg-project-logo-model="logoAttachment" class="hidden"/>
+    </fieldset>
+  </div>
+  <div class="project-details-form-data">
+    <fieldset>
+      <label for="project-name">{{ 'ADMIN.PROJECT_PROFILE.PROJECT_NAME' | translate }}</label>
+      <input type="text" name="name" placeholder="{{'ADMIN.PROJECT_PROFILE.PROJECT_NAME' | translate}}" id="project-name" ng-model="project.name" data-required="true" maxlength="45" disabled="true"/>
+    </fieldset>
+    <fieldset>
+      <label for="project-description">{{ 'ADMIN.PROJECT_PROFILE.DESCRIPTION' | translate }}</label>
+      <textarea name="description" ng-attr-placeholder="{{'ADMIN.PROJECT_PROFILE.DESCRIPTION' | translate}}" id="project-description" ng-model="project.description" data-required="true" disabled="true"></textarea>
+    </fieldset>
+    <fieldset>
+      <label for="tags">{{ 'ADMIN.PROJECT_PROFILE.TAGS' | translate }}</label>
+      <tg-tag-line-common disable-color-selection="disable-color-selection" project="project" tags="projectTags" permissions="" on-add-tag="ctrl.addTag(name)" on-delete-tag="ctrl.deleteTag(tag)" class="tags-block"></tg-tag-line-common>
+    </fieldset>
+    <div class="admin-project-profile-owner-actions">
+      <div class="owner-info">
+        <div class="owner-info-title">{{ 'ADMIN.PROJECT_PROFILE.PROJECT_OWNER' | translate }}</div>
+        <div class="owner-name">{{ ::project.owner.full_name_display }}</div>
+      </div>
+    </div>
+    <fieldset>
+      <div class="project-privacy-settings">
+        <div ng-if="!project.is_private" class="privacy-option">
+          <input ng-disabled="true" type="radio" id="private-project" name="privacy-project" ng-model="project.is_private" ng-value="false" class="privacy-project"/>
+          <label for="private-project" class="trans-button">{{ 'ADMIN.PROJECT_PROFILE.PUBLIC_PROJECT' | translate }}</label>
+        </div>
+        <div ng-if="project.is_private" class="privacy-option">
+          <input ng-disabled="true" type="radio" id="public-project" name="privacy-project" ng-model="project.is_private" ng-value="true" class="privacy-project"/>
+          <label for="public-project" class="trans-button">{{'ADMIN.PROJECT_PROFILE.PRIVATE_PROJECT' | translate }}</label>
+        </div>
+      </div>
+    </fieldset><a href="" title="{{'ADMIN.PROJECT_PROFILE.DELETE' | translate}}" ng-click="ctrl.openDeleteLightbox()" class="delete-project">{{ 'ADMIN.PROJECT_PROFILE.DELETE' | translate }}</a>
+  </div>
+</form>
